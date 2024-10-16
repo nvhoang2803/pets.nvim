@@ -1,13 +1,15 @@
-stand_actions = { "idle", "idle_left", "standtosit", "walk", "walk_left", "poop", "angry", "surprise", "jump", "pounce" }
+local stand_actions = { "idle", "idle_left", "standtosit", "walk", "walk_left", "poop", "angry", "surprise", "jump", "pounce" }
+local sit_actions = { "sit", "sittolie", "sittostand", "stand_two_legs", "wait_to_scare" }
+local lie_actions = { "lie", "lietosit", "sleep" }
 
 return {
   next_actions = {
     -- idle
     idle = stand_actions,  -- Using the predefined stand_actions
     idle_left = stand_actions,  -- You can reuse it like this
-    lie = { "lie", "lietosit", "sleep" },
-    sleep = { "lie", "lietosit", "sleep" },
-    sit = { "sit", "sittolie", "sittostand", "stand_two_legs", "wait_to_scare" },
+    lie = lie_actions,
+    sleep = lie_actions,
+    sit = sit_actions,
 
     -- Movement
     run = { "run", "walk", "walk_to_stop" },
@@ -19,22 +21,22 @@ return {
     -- Reactions
     poop = { "walk" },
     angry = { "idle" },
-    stand_two_legs = { "sit", "walk_two_legs", "stand_two_legs" },
+    stand_two_legs = { "walk_two_legs", "stand_two_legs" },
     walk_to_stop = { "walk", "walk_left", "idle" },
     walk_to_stop_left = { "walk", "walk_left", "idle_left" },
 
     wait_to_scare = { "surprise", "dash" },
+    dash = stand_actions,
     surprise = { "jump" },
     jump = { "run" },
     pounce = { "idle" },
 
-    walk_two_legs = { "stand_two_legs", "walk_two_legs" },
-    
+    walk_two_legs = { "stand_two_legs", "walk_two_legs", "sit" },
     -- Transition
-    lietosit = { "sit", "sittostand" },
-    sittolie = { "lie" },
+    lietosit = sit_actions,
+    sittolie = lie_actions,
     sittostand = stand_actions,
-    standtosit = { "sit" },
+    standtosit = sit_actions,
   },
   idle_actions = { "idle", "sit", "lie", "sleep" },
   first_action = "idle",
