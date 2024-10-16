@@ -31,7 +31,7 @@ return {
     jump = { "dash" },
     pounce = stand_actions,
 
-    walk_two_legs = { "stand_two_legs", "walk_two_legs", "sit" },
+    walk_two_legs = { "walk_two_legs", "stand_two_legs", "sit" },
     -- Transition
     lietosit = {"sit"},
     sittolie = {"lie", "sleep"},
