@@ -1,4 +1,4 @@
-local stand_actions = { "idle", "idle_left", "standtosit", "walk", "walk_left", "poop", "angry", "surprise", "jump", "pounce" }
+local stand_actions = { "idle", "standtosit", "walk", "walk_left", "poop", "angry", "surprise", "jump", "pounce", "dash" }
 local sit_actions = { "sit", "sittolie", "sittostand", "stand_two_legs", "wait_to_scare" }
 local lie_actions = { "lie", "lietosit", "sleep" }
 
@@ -15,21 +15,21 @@ return {
     run = { "run", "walk", "walk_to_stop" },
     run_left = { "run_left", "walk_left", "walk_to_stop_left" },
 
-    walk = { "walk", "run", "idle" },
+    walk = { "walk", "run", "idle", "standtosit" },
     walk_left = { "walk_left", "run_left", "idle_left" },
 
     -- Reactions
     poop = { "walk" },
-    angry = { "idle" },
+    angry = { "pounce" },
     stand_two_legs = { "walk_two_legs", "stand_two_legs" },
-    walk_to_stop = { "walk", "walk_left", "idle" },
+    walk_to_stop = { "walk", "walk_left", "idle", "standtosit" },
     walk_to_stop_left = { "walk", "walk_left", "idle_left" },
 
     wait_to_scare = { "surprise", "dash" },
     dash = stand_actions,
     surprise = { "jump" },
-    jump = { "run" },
-    pounce = { "idle" },
+    jump = { "dash" },
+    pounce = stand_actions,
 
     walk_two_legs = { "stand_two_legs", "walk_two_legs", "sit" },
     -- Transition
