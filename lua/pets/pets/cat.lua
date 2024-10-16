@@ -1,7 +1,8 @@
 return {
   next_actions = {
     -- idle
-    idle = { "idle", "standtosit", "walk", "walk_left", "poop", "angry", "surprise", "jump" },
+    idle = { "idle", "idle_left", "standtosit", "walk", "walk_left", "poop", "angry", "surprise", "jump" },
+    idle_left = { "idle", "idle_left", "standtosit", "walk", "walk_left", "poop", "angry", "surprise", "jump" },
     lie = { "lie", "lietosit" },
     sit = { "sit", "sittolie", "sittostand", "stand_two_legs" },
 
@@ -18,7 +19,8 @@ return {
     surprise = { "jump" },
     jump = { "run" },
     stand_two_legs = { "sit", "walk_two_legs", "stand_two_legs" },
-    walk_to_stop = { "walk_left", "walk_left", "idle"},
+    walk_to_stop = { "walk", "walk_left", "idle"},
+    walk_to_stop_left = { "walk", "walk_left", "idle_left"},
 
     walk_two_legs = { "stand_two_legs", "walk_two_legs"},
     -- Transition
@@ -40,4 +42,11 @@ return {
           fast = { "run_left" },
       },
   },
+  get_death_animation = function(current_action)
+    -- local split_animations = { "split_idle", "divide", "split_walk", "split_walk_left", "split_swap" }
+    -- if vim.tbl_contains(split_animations, current_action) then
+    --   return "split_die"
+    -- end
+    return "die"
+  end,
 }
