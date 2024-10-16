@@ -18,6 +18,7 @@ return {
     surprise = { "jump" },
     jump = { "run" },
     stand_two_legs = { "sit", "walk_two_legs", "stand_two_legs" },
+    walk_to_stop = { "walk_left", "walk_left", "idle"},
 
     walk_two_legs = { "stand_two_legs", "walk_two_legs"},
     -- Transition
