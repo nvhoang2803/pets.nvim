@@ -1,52 +1,55 @@
+stand_actions = { "idle", "idle_left", "standtosit", "walk", "walk_left", "poop", "angry", "surprise", "jump", "pounce" }
+
 return {
   next_actions = {
     -- idle
-    idle = { "idle", "idle_left", "standtosit", "walk", "walk_left", "poop", "angry", "surprise", "jump" },
-    idle_left = { "idle", "idle_left", "standtosit", "walk", "walk_left", "poop", "angry", "surprise", "jump" },
-    lie = { "lie", "lietosit" },
-    sit = { "sit", "sittolie", "sittostand", "stand_two_legs" },
+    idle = stand_actions,  -- Using the predefined stand_actions
+    idle_left = stand_actions,  -- You can reuse it like this
+    lie = { "lie", "lietosit", "sleep" },
+    sleep = { "lie", "lietosit", "sleep" },
+    sit = { "sit", "sittolie", "sittostand", "stand_two_legs", "wait_to_scare" },
 
     -- Movement
-    run = { "run", "walk" },
-    run_left = { "run_left", "walk_left" },
+    run = { "run", "walk", "walk_to_stop" },
+    run_left = { "run_left", "walk_left", "walk_to_stop_left" },
 
-    walk = { "walk", "run", "walk_to_stop"},
-    walk_left = { "walk_left", "run_left", "walk_to_stop" },
+    walk = { "walk", "run", "idle" },
+    walk_left = { "walk_left", "run_left", "idle_left" },
 
     -- Reactions
     poop = { "walk" },
-    angry = { "idle"},
+    angry = { "idle" },
+    stand_two_legs = { "sit", "walk_two_legs", "stand_two_legs" },
+    walk_to_stop = { "walk", "walk_left", "idle" },
+    walk_to_stop_left = { "walk", "walk_left", "idle_left" },
+
+    wait_to_scare = { "surprise", "dash" },
     surprise = { "jump" },
     jump = { "run" },
-    stand_two_legs = { "sit", "walk_two_legs", "stand_two_legs" },
-    walk_to_stop = { "walk", "walk_left", "idle"},
-    walk_to_stop_left = { "walk", "walk_left", "idle_left"},
+    pounce = { "idle" },
 
-    walk_two_legs = { "stand_two_legs", "walk_two_legs"},
+    walk_two_legs = { "stand_two_legs", "walk_two_legs" },
+    
     -- Transition
-    lietosit = { "sit" },
-    sittolie = { "lie"},
-    sittostand = { "idle" },
+    lietosit = { "sit", "sittostand" },
+    sittolie = { "lie" },
+    sittostand = stand_actions,
     standtosit = { "sit" },
   },
-  idle_actions = { "idle", "sit", "lie" },
+  idle_actions = { "idle", "sit", "lie", "sleep" },
   first_action = "idle",
   movements = {
-      right = {
-          normal = { "walk" },
-          fast = { "run", "jump" },
-          slow = { "walk_two_legs"}
-      },
-      left = {
-          normal = { "walk_left" },
-          fast = { "run_left" },
-      },
+    right = {
+      normal = { "walk" },
+      fast = { "run", "jump", "dash" },
+      slow = { "walk_two_legs" }
+    },
+    left = {
+      normal = { "walk_left" },
+      fast = { "run_left" },
+    },
   },
   get_death_animation = function(current_action)
-    -- local split_animations = { "split_idle", "divide", "split_walk", "split_walk_left", "split_swap" }
-    -- if vim.tbl_contains(split_animations, current_action) then
-    --   return "split_die"
-    -- end
     return "die"
   end,
 }
